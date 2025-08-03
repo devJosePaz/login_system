@@ -2,7 +2,7 @@ from app.database import Base
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-class User(Base):
+class UserModel(Base):
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, primary_key=True, index=True)
