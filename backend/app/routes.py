@@ -24,7 +24,7 @@ async def register(user_data: schemas.BaseModel, db: AsyncSession = Depends(get_
     return new_user
 
 @router.post("/login", response_model=schemas.UserResponse, status_code=status.HTTP_202_ACCEPTED)
-async def login(user_data: schemas.UserCreatem, db: AsyncSession = Depends(get_db)):
+async def login(user_data: schemas.UserCreate, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(models.UserModel).where(models.UserModel.email == user_data.email))
     user = result.scalars().first()
 
