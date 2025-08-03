@@ -20,6 +20,8 @@ async def register(user_data: schemas.BaseModel, db: AsyncSession = Depends(get_
     await db.commit()
     await db.refresh(new_user)
 
+    return new_user
+
 
 
     
