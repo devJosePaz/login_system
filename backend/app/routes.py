@@ -14,7 +14,7 @@ async def register(user_data: schemas.UserCreate, db: AsyncSession = Depends(get
     if user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="error: user already exists.")
 
-    new_user = models.UserModel(email=user_data.email, password=utils.hash_password(user_data.password))
+    new_user = models.UserModel(email=user_data.email, hashed_password=utils.hash_password(user_data.password))
 
     
     db.add(new_user)
