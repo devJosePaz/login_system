@@ -7,7 +7,7 @@ from backend.app import schemas, models, utils
 router = APIRouter()
 
 @router.post("/register", response_model=schemas.UserResponse, status_code=status.HTTP_201_CREATED)
-async def register(user_data: schemas.BaseModel, db: AsyncSession = Depends(get_db)):
+async def register(user_data: schemas.UserCreate, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(models.UserModel).where(models.UserModel.email == user_data.email))
     user = resutt.scalars().first()
 
