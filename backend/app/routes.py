@@ -37,6 +37,12 @@ async def login(user_data: schemas.UserCreate, db: AsyncSession = Depends(get_db
     token = utils.create_access_token(data={"sub": user.email})
     return {"access_token": token, "token_type": "bearer"}
 
+@router.get("/dashboard", status_code=status.HTTP_200_OK)
+async def dashboard(current_user: str = Depends(utils.get_current_user)):
+    return {"message": f"success! you are loged in as {current_user}."}
+
+
+
 
 
 
