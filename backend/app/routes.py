@@ -23,7 +23,7 @@ async def register(user_data: schemas.UserCreate, db: AsyncSession = Depends(get
 
     return new_user
 
-@router.post("/login", response_model=schemas.UserResponse, status_code=status.HTTP_202_ACCEPTED)
+@router.post("/login", response_model=schemas.TokenResponse, status_code=status.HTTP_202_ACCEPTED)
 async def login(user_data: schemas.UserCreate, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(models.UserModel).where(models.UserModel.email == user_data.email))
     user = result.scalars().first()
@@ -35,7 +35,7 @@ async def login(user_data: schemas.UserCreate, db: AsyncSession = Depends(get_db
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="error: incorrect password.")
 
     token = utils.create_access_token(data={"sub": user.email})
-    return {"access token": token, "token_type": "bearer"}
+    return {"access_token": token, "token_type": "bearer"}
 
 
 
