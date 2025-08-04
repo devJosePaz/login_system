@@ -13,6 +13,3 @@ class Settings(BaseSettings):
 
 settings = Settings()
 
-print("DEBUG: Current working directory =", os.getcwd())
-print("DEBUG: .env file expected at =", os.path.abspath(".env"))
-print("DEBUG: DATABASE_URL (from os.getenv) =", os.getenv("DATABASE_URL"))
